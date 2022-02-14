@@ -10,12 +10,12 @@ class Libro {
         this.stock = stock
     }
     
-    mostrarDatos() {
+    /* mostrarDatos() {
         let datos = document.createElement("div")
         datos.innerHTML = `<p>ISBN: ${this.isbn}</p><p>titulo: ${this.titulo}</p><p>Autor: ${this.autor}</p>
                             <p>Editorial: ${this.editorial}</p><p>Precio: ${this.precio}</p><p>En stock: ${this.stock}</p>`
         document.body.appendChild(datos)
-    }
+    } */
 
     venderEjemplar(cantidad) {
         this.stock = this.stock - cantidad
