@@ -1,4 +1,13 @@
 let carrito = []
+let librosDisponibles =  []
+
+async function cargarStock() {
+    const response = await fetch('stock.json');
+    librosDisponibles = await response.json();
+}
+    
+
+ 
 
 // Funcion que muestra los libros disponibles en el DOM
 const mostrarLibrosDisponibles = () => {
