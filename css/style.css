@@ -22,9 +22,8 @@ body {
     text-align: center;
 }
 
-.m-1 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.mr-10 {
+    margin-right: 10em;
 }
 
 .modal {
@@ -78,9 +77,31 @@ body {
     color: #fefefe;
     border-radius: 30px;
     padding: 1px 7px;
+    vertical-align: top;
     visibility: hidden
 }
 
 .btnEliminar {
     cursor: pointer;
+}
+
+.footer {
+    background-color: #181D31;
+    color: #fff;
+    padding: 2em 1em;
+    margin-top: 5em;
+}
+.footer .footerTitle {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: .5em 0;
+}
+.footer .footerElement {
+    font-size: .8em;
+    text-align: justify;
+}
+
+.btn.btn-primary {
+    background-color: #181D31 !important;
+    border-color: #181D31 !important;
 }
