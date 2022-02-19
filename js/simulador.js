@@ -12,7 +12,7 @@ const mostrarLibrosDisponibles = () => {
                                     <input type="number" id="cantidad${libro.id}" min="5" max="5">
                                     <button id="btnAgregar${libro.id}" class="btnAgregar">Agregar</button>
                                 </div>`)
-        $('#contentFlex').append(seccionLibros)
+        $('#content').append(seccionLibros)
     }
 }
 
