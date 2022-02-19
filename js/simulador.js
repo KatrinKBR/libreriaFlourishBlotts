@@ -1,13 +1,17 @@
 let carrito = []
+let stockURL = "stock.json"
 let librosDisponibles =  []
 
-async function cargarStock() {
-    const response = await fetch('stock.json');
-    librosDisponibles = await response.json();
+//Funcion que simula una llamada para obtener los datos desde un .json
+const obtenerStock = async () => {
+    const response = await fetch(stockURL)
+    .then(res => res.json())
+    return response
 }
-    
-
- 
+// Funcion que inicializa los libros disponibles en base a la respuesta a la llamada
+const initLibrosDisponibles = async () =>{
+    librosDisponibles = await obtenerStock();
+}
 
 // Funcion que muestra los libros disponibles en el DOM
 const mostrarLibrosDisponibles = () => {
@@ -155,9 +159,9 @@ const agregarBtnEliminarListeners = () => {
 }
 
 // Llamado a las funciones
-mostrarLibrosDisponibles()
-agregarBtnAgregarListeners()
-
+initLibrosDisponibles()
+    .then(mostrarLibrosDisponibles)
+    .then(agregarBtnAgregarListeners)
 
 
 
