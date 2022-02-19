@@ -3,7 +3,7 @@ let carrito = []
 // Funcion que muestra los libros disponibles en el DOM
 const mostrarLibrosDisponibles = () => {
     for (libro of librosDisponibles) {
-        let seccionLibros = $(`<div>
+        let seccionLibros = $(`<div class="col">
                                     <img src="${libro.portada}">
                                     <h3>${libro.titulo}</h3>
                                     <p>${libro.autor}</p>
