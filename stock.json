@@ -35,8 +35,48 @@
         "titulo": "Doctor Sleep",
         "autor": "Stephen King", 
         "editorial": "Scribner", 
-        "precio": 9500, 
+        "precio": 14500, 
         "portada": "./assets/doctorSleep.jpg", 
         "stock": 6
+    },
+    {
+        "id": 5, 
+        "isbn": 9780689835711, 
+        "titulo": "The Hound of the Baskervilles",
+        "autor": "Arthur Conan Doyle", 
+        "editorial": "Aladdin", 
+        "precio": 4000, 
+        "portada": "./assets/theHound.jpg", 
+        "stock": 2
+    },
+    {
+        "id": 6, 
+        "isbn": 9780345538376, 
+        "titulo": "The Lord of the Rings Set",
+        "autor": "J.R.R Tolkien", 
+        "editorial": "Del Rey", 
+        "precio": 80000, 
+        "portada": "./assets/lotr.jpg", 
+        "stock": 5
+    },
+    {
+        "id": 7, 
+        "isbn": 9780439023481, 
+        "titulo": "The Hunger Games",
+        "autor": "Suzanne Collins", 
+        "editorial": "Scholastic Press", 
+        "precio": 10000, 
+        "portada": "./assets/theHunger.jpg", 
+        "stock": 7
+    },
+    {
+        "id": 8, 
+        "isbn": 9780545298360, 
+        "titulo": "Phantom of the Auditorium",
+        "autor": "R.L. Stine", 
+        "editorial": "Scholastic Paperbacks", 
+        "precio": 7000, 
+        "portada": "./assets/phantom.jpg", 
+        "stock": 7
     }
 ]

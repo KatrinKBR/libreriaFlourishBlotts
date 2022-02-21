@@ -16,14 +16,14 @@ const initLibrosDisponibles = async () =>{
 // Funcion que muestra los libros disponibles en el DOM
 const mostrarLibrosDisponibles = () => {
     for (libro of librosDisponibles) {
-        let seccionLibros = $(`<div class="col">
+        let seccionLibros = $(`<div class="col-3 my-4">
                                     <img src="${libro.portada}">
-                                    <h3>${libro.titulo}</h3>
+                                    <h5 class="my-3">${libro.titulo}</h5>
                                     <p>${libro.autor}</p>
                                     <p>$${libro.precio}</p>
                                     <label for="cantidad${libro.id}">Cantidad</label>
                                     <input type="number" id="cantidad${libro.id}" min="5" max="5">
-                                    <button id="btnAgregar${libro.id}" class="btnAgregar">Agregar</button>
+                                    <button id="btnAgregar${libro.id}" class="btn btn-primary">Agregar</button>
                                 </div>`)
         $('#content').append(seccionLibros)
     }
@@ -66,14 +66,18 @@ const agregarLibro = (id) => {
                                 <img id="btnEliminar${id}" class="btnEliminar" src="../assets/trash.png" alt="trash">
                             </div>`)
         $('#contentCarrito').append(nuevoLibro)
+
+        // Ocultamos el mensaje de no hay articulos y mostramos el total
+        $("#carritoVacio").css("visibility","hidden")
+        $("#totalCompraMsj").css("visibility","visible")
     }
     // Guarda el carrito en el localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito))
 
     // Actualiza el total del carrito
-    actualizarTotalCarrito()
+    actualizarTotalCarrito(carrito)
     // Actualiza el numero con la cantidad de libros en el carrito
-    actualizarCantidadCarrito()
+    actualizarCantidadCarrito(carrito)
 
     // Agrega el evento click a los botones de eliminar
     agregarBtnEliminarListeners()
@@ -88,7 +92,7 @@ const eliminarLibro = (id) => {
    $(`#elementoCarrito${id}`).remove();
 
     // Obtenemos el carrito guardado en el localStorage
-    carritoLocal = JSON.parse(localStorage.getItem("carrito"))
+    let carritoLocal = JSON.parse(localStorage.getItem("carrito"))
 
     //Quitamos el libro del carrito
     carritoLocal.splice(carritoLocal.findIndex(libro => libro.id == id), 1)
@@ -99,13 +103,19 @@ const eliminarLibro = (id) => {
     // Vuelve a guardar el carrito en el localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito))
 
+    // Si el carrito quedo vacio, mostramos el mensaje de no hay articulos y ocultamos el total
+    if (carrito.length == 0) {
+        $("#carritoVacio").css("visibility","visible")
+        $("#totalCompraMsj").css("visibility","hidden")
+    }
+
     // Actualiza el total del carrito
-    actualizarTotalCarrito()
+    actualizarTotalCarrito(carrito)
     // Actualiza el numero con la cantidad de libros en el carrito
-    actualizarCantidadCarrito()
+    actualizarCantidadCarrito(carrito)
 }
 
-const calcularMontoTotalCarrito = () => {
+const calcularMontoTotalCarrito = (carrito) => {
     let calculoTotal = 0
     for (libro of carrito) {
         calculoTotal += multiplicarValores(libro.precio, libro.stock)
@@ -113,7 +123,7 @@ const calcularMontoTotalCarrito = () => {
     return calculoTotal
 }
 
-const actualizarCantidadCarrito = () => {
+const actualizarCantidadCarrito = (carrito) => {
     let cantidadTotal = 0
     // Cuenta el total de elementos en el carrito revisando el stock de c/u
     for (libro of carrito) {
@@ -131,8 +141,8 @@ const actualizarCantidadCarrito = () => {
     $('#cuentaCarrito').html(cantidadTotal)
 }
 
-const actualizarTotalCarrito = () => {
-    $("#totalCompra").html(calcularMontoTotalCarrito())
+const actualizarTotalCarrito = (carrito) => {
+    $("#totalCompra").html(calcularMontoTotalCarrito(carrito))
 }
 
 const multiplicarValores = (precio,cantidad) => {
@@ -158,11 +168,47 @@ const agregarBtnEliminarListeners = () => {
     }
 }
 
+// Funcion que permite mantener el carrito al refrescar el sitio
+const cargarCarritoAlRefresco = () => {
+    // Obtiene el carrito del storage
+    let carritoLocal = JSON.parse(localStorage.getItem("carrito"))
+
+    // Se le asigna al carrito
+    carrito = carritoLocal
+
+    // Si el carrito no esta vacio, mostramos los elementos guardados en el storage
+    if (carritoLocal.length != 0){
+        for(elemento of carritoLocal){
+            let elementoCarrito = $(`<div class="elementosCarrito" id="elementoCarrito${elemento.id}">
+                                <p>${elemento.titulo}</p>
+                                <p>Precio: $${elemento.precio}</p>
+                                <p id="carritoCantidad${elemento.id}">Cantidad: ${elemento.stock}</p> 
+                                <img id="btnEliminar${elemento.id}" class="btnEliminar" src="../assets/trash.png" alt="trash">
+                            </div>`)
+            $('#contentCarrito').append(elementoCarrito)
+        }
+
+        // Se esconde el mensaje de vacio y se muestra el total
+        $("#carritoVacio").css("visibility","hidden")
+        $("#totalCompraMsj").css("visibility","visible")
+
+        // Se actualiza el total y la cantidad
+        actualizarTotalCarrito(carritoLocal)
+        actualizarCantidadCarrito(carritoLocal)
+
+        // Se agrega el evento click para los botones
+        agregarBtnEliminarListeners()
+
+    }
+}
+
 // Llamado a las funciones
 initLibrosDisponibles()
     .then(mostrarLibrosDisponibles)
     .then(agregarBtnAgregarListeners)
 
-
+$(()=>{
+    cargarCarritoAlRefresco()
+})
 
 

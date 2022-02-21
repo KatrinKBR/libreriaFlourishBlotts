@@ -18,11 +18,17 @@ body {
 .titulo {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 1em;
 }
 
 .mr-10 {
     margin-right: 10em;
+}
+
+#totalCompraMsj{
+    visibility: hidden;
+}
+#carritoVacio{
+    visibility: visible;
 }
 
 .modal {
