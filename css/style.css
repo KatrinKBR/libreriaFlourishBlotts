@@ -25,10 +25,10 @@ body {
 }
 
 #totalCompraMsj{
-    visibility: hidden;
+    display: none;
 }
 #carritoVacio{
-    visibility: visible;
+    display: none;
 }
 
 .modal {

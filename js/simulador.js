@@ -68,8 +68,8 @@ const agregarLibro = (id) => {
         $('#contentCarrito').append(nuevoLibro)
 
         // Ocultamos el mensaje de no hay articulos y mostramos el total
-        $("#carritoVacio").css("visibility","hidden")
-        $("#totalCompraMsj").css("visibility","visible")
+        $("#carritoVacio").hide()
+        $("#totalCompraMsj").show()
     }
     // Guarda el carrito en el localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito))
@@ -105,8 +105,8 @@ const eliminarLibro = (id) => {
 
     // Si el carrito quedo vacio, mostramos el mensaje de no hay articulos y ocultamos el total
     if (carrito.length == 0) {
-        $("#carritoVacio").css("visibility","visible")
-        $("#totalCompraMsj").css("visibility","hidden")
+        $("#carritoVacio").show()
+        $("#totalCompraMsj").hide()
     }
 
     // Actualiza el total del carrito
@@ -189,8 +189,8 @@ const cargarCarritoAlRefresco = () => {
         }
 
         // Se esconde el mensaje de vacio y se muestra el total
-        $("#carritoVacio").css("visibility","hidden")
-        $("#totalCompraMsj").css("visibility","visible")
+        $("#carritoVacio").hide()
+        $("#totalCompraMsj").show()
 
         // Se actualiza el total y la cantidad
         actualizarTotalCarrito(carritoLocal)
@@ -208,6 +208,7 @@ initLibrosDisponibles()
     .then(agregarBtnAgregarListeners)
 
 $(()=>{
+    $("#carritoVacio").show()
     cargarCarritoAlRefresco()
 })
 
