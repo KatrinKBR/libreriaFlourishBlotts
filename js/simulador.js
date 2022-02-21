@@ -1,8 +1,9 @@
-let carrito = []
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []
+//localStorage.setItem("carrito", JSON.stringify(carrito))
 let stockURL = "stock.json"
 let librosDisponibles =  []
 
-//Funcion que simula una llamada para obtener los datos desde un .json
+//Funcion que simula una llamada con fetch para obtener los datos desde un .json 
 const obtenerStock = async () => {
     const response = await fetch(stockURL)
                             .then(res => res.json())
@@ -232,6 +233,7 @@ $("#btnBuscar").click(() => {
 })
 
 $(()=>{
+    //localStorage.setItem("carrito", JSON.stringify(carrito))
     $("#carritoVacio").show()
     cargarCarritoAlRefresco()
 
