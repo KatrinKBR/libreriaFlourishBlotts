@@ -137,7 +137,6 @@ const buscarLibro = () => {
         const resultado = librosDisponibles.filter(libro => libro.titulo.toLowerCase().includes(valorInput) && libro.stock != 0)
         // Muestra el DOM para todos los resultados
         for (libro of resultado) {
-            console.log(libro.titulo.toLowerCase())
             let seccionLibros = domLibrosDisponibles(libro)
             $('#content').append(seccionLibros)
         }
