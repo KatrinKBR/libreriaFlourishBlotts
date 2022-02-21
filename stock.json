@@ -77,6 +77,16 @@
         "editorial": "Scholastic Paperbacks", 
         "precio": 7000, 
         "portada": "./assets/phantom.jpg", 
-        "stock": 7
+        "stock": 2
+    },
+    {
+        "id": 9, 
+        "isbn": 9780545010221, 
+        "titulo": "Harry Potter and the Deathly Hallows",
+        "autor": "J.K. Rowling", 
+        "editorial": "Scholastic", 
+        "precio": 10500, 
+        "portada": "./assets/hp7.jpg", 
+        "stock": 0
     }
 ]

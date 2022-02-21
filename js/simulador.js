@@ -17,91 +17,103 @@ const initLibrosDisponibles = async () =>{
 const domLibrosDisponibles = (libro) => {
     let seccionLibros = $(`<div class="col-lg-3 my-4">
                                     <img src="${libro.portada}">
-                                    <p class="fs-5 my-3">${libro.titulo}</h5>
-                                    <p>${libro.autor}</p>
-                                    <p>$${libro.precio}</p>
-                                    <button id="btnAgregar${libro.id}" class="btn btn-primary">Agregar</button>
+                                    <span class="d-block fs-5 fw-bold my-2">${libro.titulo}</span>
+                                    <span class="d-block">${libro.autor}</span>
+                                    <span class="d-block my-2">$${libro.precio}</span>
+                                    <button id="btnAgregar${libro.id}" class="btn btn-primary" onClick="agregarLibro(this.id)">Agregar</button>
                                 </div>`)
     return seccionLibros
+}
+
+// Funcion que devuelve la estructura del DOM para libros en carrito
+const domLibrosEnCarrito = (libro) =>{
+    let nuevoLibro = $(`<div class="row my-4" id="elementoCarrito${libro.id}">
+                                <div class="col-5 justify-content-center">
+                                    <img src="${libro.portada}" class="portadaCarrito mx-auto d-block">
+                                </div>
+                                <div class="col-5 align-self-center">
+                                    <label class="fw-bold">${libro.titulo}</label>
+                                    <label>Precio: $${libro.precio}</label>
+                                    <p id="carritoCantidad${libro.id}">Cantidad: ${libro.cantidad}</p> 
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="../assets/trash.png" alt="trash" onClick="eliminarLibro(this.id)">
+                                </div>
+                            </div>`)
+    return nuevoLibro
 }
 
 // Funcion que muestra los libros disponibles en el DOM
 const mostrarLibrosDisponibles = () => {
     for (libro of librosDisponibles) {
-        let seccionLibros = domLibrosDisponibles(libro)
-        $('#content').append(seccionLibros)
+        // Solo se muestran los libros con stock
+        if(libro.stock != 0) {
+            let seccionLibros = domLibrosDisponibles(libro)
+            $('#content').append(seccionLibros)
+        }
     }
 }
 
 // Funcion que se llama al hacer click en el boton agregar
-const agregarLibro = (id) => {
+const agregarLibro = (elemId) => {
+    let id = parseInt(elemId.replace("btnAgregar",""))
+
     // Verificamos si el libro ya esta en el carrito
     let libroExistente = carrito.find(libro => libro.id == id)
 
     // Si existe
     if (libroExistente != null) {
-        // Obtenemos la cantidad ingresada por el usuario
-        // const cantidad = parseInt($(`#cantidad${id}`).val())
-
-        // Añadimos la cantidad seleccionada a la ya existente en el carrito
-        libroExistente.cantidad += libroExistente.cantidad
-
+        // Añadimos +1 la ya existente en el carrito
+        libroExistente.cantidad += 1
+        
         // Actualizamos el DOM
         $(`#carritoCantidad${id}`).html(`<p id="carritoCantidad${id}">Cantidad: ${libroExistente.cantidad}</p>`)
     // Si se esta agregando por primera vez
     } else {
-        // Obtenemos el libro añadir
+        // Obtenemos el libro a añadir
         let libroNuevo = librosDisponibles.find(libro => libro.id == id)
 
-        // Obtenemos la cantidad ingresada por el usuario
-        // const cantidad = parseInt($(`#cantidad${id}`).val())
-
-        // Le asignamos la cantidad
-        // Nota: Estamos reutilizando el campo de stock como la cantidad de los ejemplares en el carrito
+        // Le asignamos una nueva propiedad al objeto para cantidad
         libroNuevo["cantidad"] = 1
 
         // Se guarda en el arreglo de carrito
         carrito.push(libroNuevo)
 
-        let nuevoLibro = $(`<div class="elementosCarrito" id="elementoCarrito${id}">
-                                <p>${libroNuevo.titulo}</p>
-                                <p>Precio: $${libroNuevo.precio}</p>
-                                <p id="carritoCantidad${id}">Cantidad: ${libroNuevo.cantidad}</p> 
-                                <img id="btnEliminar${id}" class="btnEliminar" src="../assets/trash.png" alt="trash">
-                            </div>`)
-        $('#contentCarrito').append(nuevoLibro)
+        let libroNuevoDom = domLibrosEnCarrito(libroNuevo)
+        $('#contentCarrito').append(libroNuevoDom)
 
         // Ocultamos el mensaje de no hay articulos y mostramos el total
         $("#carritoVacio").hide()
         $("#totalCompraMsj").show()
     }
+
     // Guarda el carrito en el localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito))
 
     // Actualiza el total del carrito
-    actualizarTotalCarrito(carrito)
+    actualizarTotalCarrito()
     // Actualiza el numero con la cantidad de libros en el carrito
-    actualizarCantidadCarrito(carrito)
-
-    // Agrega el evento click a los botones de eliminar
-    agregarBtnEliminarListeners()
+    actualizarCantidadCarrito()
 
     // Vacia el input de cantidad
     $(`#cantidad${id}`).val("")
 }
 
 // Funcion que se llama al hacer click en el boton eliminar
-const eliminarLibro = (id) => {
+const eliminarLibro = (elemId) => {
+    let id = parseInt(elemId.replace("btnEliminar",""))
+
     // Quitamos los elementos del DOM
    $(`#elementoCarrito${id}`).remove();
-
     // Eliminamos el elemento de carrito
     carrito = carrito.filter(libro => libro.id !== id)
+    
+    // Vuelve a guardar el carrito en el localStorage
+    localStorage.setItem("carrito", JSON.stringify(carrito))
 
-    // Si el carrito quedo vacio, mostramos el mensaje de no hay articulos y ocultamos el total
+    // Si el carrito quedo vacio, mostramos el mensaje de no hay articulos
     if (carrito.length === 0) {
         $("#carritoVacio").show()
-        $("#totalCompraMsj").hide()
     }
 
     // Actualiza el total del carrito
@@ -109,18 +121,21 @@ const eliminarLibro = (id) => {
     // Actualiza el numero con la cantidad de libros en el carrito
     actualizarCantidadCarrito()
 
-    // Vuelve a guardar el carrito en el localStorage
-    localStorage.setItem("carrito", JSON.stringify(carrito))
 }
 
 // Funcion que se llama al hacer click en el boton de buscar libro
 const buscarLibro = () => {
+    // Vacia el html del content y obtiene el valor del input
     $('#content').html("")
     const valorInput = $("#inputBuscar").val().toLowerCase()
+
+    // Si esta vacio, vuelve a mostrar todos los libros
     if(valorInput == "") {
         mostrarLibrosDisponibles()
     } else {
-        const resultado = librosDisponibles.filter(libro => libro.titulo.toLowerCase().includes(valorInput))
+        // Sino, realiza el filtro en base al titulo ingresado por el usuario
+        const resultado = librosDisponibles.filter(libro => libro.titulo.toLowerCase().includes(valorInput) && libro.stock != 0)
+        // Muestra el DOM para todos los resultados
         for (libro of resultado) {
             console.log(libro.titulo.toLowerCase())
             let seccionLibros = domLibrosDisponibles(libro)
@@ -141,16 +156,16 @@ const calcularMontoTotalCarrito = () => {
 // Funcion para actualizar la cantidad de elementos en el carrito
 const actualizarCantidadCarrito = () => {
     let cantidadTotal = 0
-    // Cuenta el total de elementos en el carrito revisando el stock de c/u
+    // Cuenta el total de elementos en el carrito revisando la cantidad de c/u
     for (libro of carrito) {
         cantidadTotal += parseInt(libro.cantidad)
     }
     // Si el carrito quedo vacio, se esconde el elemento donde se muestra la cuenta,
     // sino se hace visible
     if (cantidadTotal == 0) {
-        $('#cuentaCarrito').css("visibility", "hidden")
+        $('#cuentaCarrito').hide()
     } else {
-        $('#cuentaCarrito').css("visibility", "visible")
+        $('#cuentaCarrito').show()
     }
 
     // Se actualiza en el elemento html la cantidad de libros
@@ -166,27 +181,17 @@ const actualizarTotalCarrito = () => {
 const cargarCarritoAlRefresco = () => {
     // Si el carrito no esta vacio, mostramos los elementos guardados en el storage
     if (carrito.length != 0){
-        for(elemento of carrito){
-            let elementoCarrito = $(`<div class="elementosCarrito" id="elementoCarrito${elemento.id}">
-                                <p>${elemento.titulo}</p>
-                                <p>Precio: $${elemento.precio}</p>
-                                <p id="carritoCantidad${elemento.id}">Cantidad: ${elemento.cantidad}</p> 
-                                <img id="btnEliminar${elemento.id}" class="btnEliminar" src="../assets/trash.png" alt="trash">
-                            </div>`)
-            $('#contentCarrito').append(elementoCarrito)
+        for(libro of carrito){
+            let libroCarritoDom = domLibrosEnCarrito(libro)
+            $('#contentCarrito').append(libroCarritoDom)
         }
 
-        // Se esconde el mensaje de vacio y se muestra el total
+        // Se esconde el mensaje de vacio
         $("#carritoVacio").hide()
-        $("#totalCompraMsj").show()
 
         // Se actualiza el total y la cantidad
         actualizarTotalCarrito()
         actualizarCantidadCarrito()
-
-        // Se agrega el evento click para los botones
-        agregarBtnEliminarListeners()
-
     }
 }
 
@@ -194,32 +199,13 @@ const multiplicarValores = (precio,cantidad) => {
     return precio*cantidad
 }
 
-// Funcion que agrega los eventos listeners en los botones de agregar
-const agregarBtnAgregarListeners = () => {
-    for (let i=1; i < librosDisponibles.length + 1; i++) {
-        $(`#btnAgregar${i}`).click(() => {
-            agregarLibro(i)
-        })
-    }
-}
-
-// Funcion que agrega los eventos listeners en los botones de eliminar
-const agregarBtnEliminarListeners = () => {
-    for (let i=1; i < carrito.length + 1; i++) {
-        // Listeners para los botones de eliminar
-        $(`#btnEliminar${i}`).click(() => {
-            eliminarLibro(i)
-        })
-    }
-}
-
-$("#btnBuscar").click(() => {
-    buscarLibro()
-})
-
+// Llamadas cuando document.ready
 $(()=>{
     $("#carritoVacio").show()
     cargarCarritoAlRefresco()
+    $("#btnBuscar").click(() => {
+        buscarLibro()
+    })
 
     initLibrosDisponibles()
     .then(mostrarLibrosDisponibles)

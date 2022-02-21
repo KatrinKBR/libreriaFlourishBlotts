@@ -42,7 +42,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <li class="nav-item mr-10">
-                            <input type="image" src="./assets/cart.png" id="btnCarrito">
+                            <input type="image" src="./assets/cart.png" id="btnCarrito" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                             <span class="cuentaCarrito" id="cuentaCarrito"></span>
                         </li>
                     </li>
@@ -58,24 +58,29 @@
             <input class="form-control me-2" type="search" placeholder="Buscar por título" aria-label="Search" id="inputBuscar">
             <button class="btn btn-primary" id="btnBuscar">Buscar</button>
         </div>
-        <p class="titulo">Libros en Inglés</p>
+        <p class="fs-2 fw-bold">Libros en Inglés</p>
         <div class="row" id="content">
         </div>
     </div>
     <!-- Fin del container -->
 
-    <!-- Incio del modal -->
-    <div id="modal" class="modal">
-        <div class="modalContent">
-            <span class="close">x</span>
-            <h3>Carrito</h3>
+    <!-- Inicio del offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header px-4 tituloCarrito">
+            <label class="fs-3">Tu carrito</label>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
             <div id="contentCarrito">
             </div>
             <p id="carritoVacio">No hay artículos en tu carrito.</span></p>
-            <p id="totalCompraMsj">Total compra: $<span id="totalCompra">0</span></p>
+            <!-- <label id="totalCompraMsj" class="fw-bold totalCompraOff">Total compra: $<span id="totalCompra">0</span></label> -->
+        </div>
+        <div class="offcanvas-footer">
+            <label id="totalCompraMsj" class="fw-bold py-2">Total de tu compra: $<span id="totalCompra">0</span></label>
         </div>
     </div>
-    <!-- Fin del modal -->
+    <!-- Fin del offcanvas -->
 
     <!-- Inicio del Footer -->
     <footer class="footer">
@@ -105,7 +110,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="
     sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="./js/modal.js"></script>
     <script src="./js/simulador.js"></script>
 </body>
 </html>

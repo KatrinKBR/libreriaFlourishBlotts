@@ -15,9 +15,12 @@ body {
 	background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg height='25px' version='1.1' viewBox='0 0 25 25' width='25px' id='svg63' sodipodi:docname='hamburger.svg' inkscape:version='1.1.2 (b8e25be833  2022-02-05)' xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape' xmlns:sodipodi='http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Csodipodi:namedview id='namedview65' pagecolor='%23505050' bordercolor='%23eeeeee' borderopacity='1' inkscape:pageshadow='0' inkscape:pageopacity='0' inkscape:pagecheckerboard='0' showgrid='false' inkscape:zoom='17.96' inkscape:cx='12.5' inkscape:cy='12.5' inkscape:window-width='1366' inkscape:window-height='658' inkscape:window-x='0' inkscape:window-y='27' inkscape:window-maximized='1' inkscape:current-layer='TabBar-Icons' /%3E%3Ctitle id='title53' /%3E%3Cdesc id='desc55' /%3E%3Cdefs id='defs57' /%3E%3Cg fill='none' fill-rule='evenodd' id='TabBar-Icons' stroke='none' stroke-width='1'%3E%3Cg fill='%23000000' id='Hamburger' style='fill:%23181d31%3Bfill-opacity:1'%3E%3Cpath d='M0 2 L25 2 L25 6 L0 6 L0 2 Z M0 10 L25 10 L25 14 L0 14 L0 10 Z M0 18 L25 18 L25 22 L0 22 L0 18 Z' id='path59' style='fill:%23181d31%3Bfill-opacity:1' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-.titulo {
-    font-size: 2rem;
-    font-weight: bold;
+.btn.btn-primary {
+    background-color: #181D31 !important;
+    border-color: #181D31 !important;
+}
+.offcanvas-header .btn-close{
+    color: #fefefe !important;
 }
 
 .mr-10 {
@@ -25,66 +28,35 @@ body {
 }
 
 #totalCompraMsj{
-    display: none;
+    position: fixed;
+    bottom: 0;
 }
+.offcanvas-footer{
+    padding: 1.5rem 1.5rem;
+    background-color: #181D31;
+    color: #fefefe;
+}
+
 #carritoVacio{
     display: none;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4);
-}
-  
-.modalContent {
-    background-color: #fefefe;
-    float: right;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 25%;
-    height: 100%;
-}
+.tituloCarrito {
+    background-color: #181D31;
+    color: #fefefe;
+ }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+.portadaCarrito {
+    width:50%;
+    height:auto
 }
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.elementosCarrito {
-    display: grid;
-    grid-template-columns: repeat(5,2fr);
-    margin: 1em 0;
-}
-
-.elementosCarrito input {
-    width: 3rem;
-    height: 2rem;
-}
-
 .cuentaCarrito {
+    display: none;
     background-color: #181D31;
     color: #fefefe;
     border-radius: 30px;
     padding: 1px 7px;
     vertical-align: top;
-    visibility: hidden
 }
 
 .btnEliminar {
@@ -105,9 +77,4 @@ body {
 .footer .footerElement {
     font-size: .8em;
     text-align: justify;
-}
-
-.btn.btn-primary {
-    background-color: #181D31 !important;
-    border-color: #181D31 !important;
 }
