@@ -37,7 +37,7 @@ const domLibrosEnCarrito = (libro) =>{
                                     <p id="carritoCantidad${libro.id}">Cantidad: ${libro.cantidad}</p> 
                                 </div>
                                 <div class="col-2 align-self-center">
-                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="../assets/trash.png" alt="eliminar" onClick="eliminarLibro(this.id)">
+                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="./assets/trash.png" alt="eliminar" onClick="eliminarLibro(this.id)">
                                 </div>
                             </div>`)
     return nuevoLibro
@@ -68,6 +68,8 @@ const agregarLibro = (elemId) => {
         
         // Actualizamos el DOM
         $(`#carritoCantidad${id}`).html(`<p id="carritoCantidad${id}">Cantidad: ${libroExistente.cantidad}</p>`)
+        // Mostrar el toaster
+        mostrarToasterCarrito(libroExistente)
     // Si se esta agregando por primera vez
     } else {
         // Obtenemos el libro a añadir
@@ -82,6 +84,9 @@ const agregarLibro = (elemId) => {
         let libroNuevoDom = domLibrosEnCarrito(libroNuevo)
         $('#contentCarrito').append(libroNuevoDom)
 
+        // Mostrar el toaster
+        mostrarToasterCarrito(libroNuevo)
+
         // Ocultamos el mensaje de no hay articulos y mostramos el total
         $("#carritoVacio").hide()
         $("#totalCompraMsj").show()
@@ -95,8 +100,9 @@ const agregarLibro = (elemId) => {
     // Actualiza el numero con la cantidad de libros en el carrito
     actualizarCantidadCarrito()
 
-    // Vacia el input de cantidad
-    $(`#cantidad${id}`).val("")
+
+
+
 }
 
 // Funcion que se llama al hacer click en el boton eliminar
@@ -196,6 +202,13 @@ const cargarCarritoAlRefresco = () => {
 
 const multiplicarValores = (precio,cantidad) => {
     return precio*cantidad
+}
+
+const mostrarToasterCarrito = (libro) => {
+    $("#toastContent").html(`<div class="fs-6 fw-bold">${libro.titulo}</div> <div>$${libro.precio}</div>`)
+    var toastLiveExample = document.getElementById('liveToast')
+    var toast = new bootstrap.Toast(toastLiveExample)
+    toast.show()
 }
 
 // Llamadas cuando document.ready
