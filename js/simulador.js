@@ -37,7 +37,7 @@ const domLibrosEnCarrito = (libro) =>{
                                     <p id="carritoCantidad${libro.id}">Cantidad: ${libro.cantidad}</p> 
                                 </div>
                                 <div class="col-2 align-self-center">
-                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="../assets/trash.png" alt="trash" onClick="eliminarLibro(this.id)">
+                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="../assets/trash.png" alt="eliminar" onClick="eliminarLibro(this.id)">
                                 </div>
                             </div>`)
     return nuevoLibro
@@ -208,7 +208,6 @@ $(()=>{
 
     initLibrosDisponibles()
     .then(mostrarLibrosDisponibles)
-    .then(agregarBtnAgregarListeners)
 })
 
 
