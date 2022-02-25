@@ -18,6 +18,7 @@ const mostrarPedido = () => {
         let libroDelPedidoDom = domResumenPedido(libro)
         $('#contentResumen').append(libroDelPedidoDom)
     }
+    actualizarTotalCarrito()
 }
 
 const pantallaExito = () => {

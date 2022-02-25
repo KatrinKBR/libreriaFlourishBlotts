@@ -1,26 +1,6 @@
 [
     {
         "id": 1, 
-        "isbn": 9780307743657, 
-        "titulo": "The Shining",
-        "autor": "Stephen King", 
-        "editorial": "Anchor", 
-        "precio": 8000, 
-        "portada": "./assets/theShining.jpg", 
-        "stock": 4
-    },
-    {
-        "id": 2, 
-        "isbn": 9788478712502, 
-        "titulo": "Three Blind Mice",
-        "autor": "Agatha Christie", 
-        "editorial": "St. Martin S Press", 
-        "precio": 10500, 
-        "portada": "./assets/threeBlindMice.jpg", 
-        "stock": 2
-    },
-    {
-        "id": 3, 
         "isbn": 9780439362139, 
         "titulo": "Harry Potter and the Philosopher Stone",
         "autor": "J.K. Rowling", 
@@ -30,17 +10,7 @@
         "stock": 3
     },
     {
-        "id": 4, 
-        "isbn": 9781476727653, 
-        "titulo": "Doctor Sleep",
-        "autor": "Stephen King", 
-        "editorial": "Scribner", 
-        "precio": 14500, 
-        "portada": "./assets/doctorSleep.jpg", 
-        "stock": 6
-    },
-    {
-        "id": 5, 
+        "id": 2, 
         "isbn": 9780689835711, 
         "titulo": "The Hound of the Baskervilles",
         "autor": "Arthur Conan Doyle", 
@@ -50,7 +20,7 @@
         "stock": 2
     },
     {
-        "id": 6, 
+        "id": 3, 
         "isbn": 9780345538376, 
         "titulo": "The Lord of the Rings Set",
         "autor": "J.R.R Tolkien", 
@@ -60,17 +30,7 @@
         "stock": 5
     },
     {
-        "id": 7, 
-        "isbn": 9780439023481, 
-        "titulo": "The Hunger Games",
-        "autor": "Suzanne Collins", 
-        "editorial": "Scholastic Press", 
-        "precio": 10000, 
-        "portada": "./assets/theHunger.jpg", 
-        "stock": 7
-    },
-    {
-        "id": 8, 
+        "id": 4, 
         "isbn": 9780545298360, 
         "titulo": "Phantom of the Auditorium",
         "autor": "R.L. Stine", 
@@ -80,7 +40,7 @@
         "stock": 2
     },
     {
-        "id": 9, 
+        "id": 5, 
         "isbn": 9780545010221, 
         "titulo": "Harry Potter and the Deathly Hallows",
         "autor": "J.K. Rowling", 
@@ -88,5 +48,45 @@
         "precio": 10500, 
         "portada": "./assets/hp7.jpg", 
         "stock": 0
+    },
+    {
+        "id": 6, 
+        "isbn": 9780307743657, 
+        "titulo": "The Shining",
+        "autor": "Stephen King", 
+        "editorial": "Anchor", 
+        "precio": 8000, 
+        "portada": "./assets/theShining.jpg", 
+        "stock": 4
+    },
+    {
+        "id": 7, 
+        "isbn": 9788478712502, 
+        "titulo": "Three Blind Mice",
+        "autor": "Agatha Christie", 
+        "editorial": "St. Martin S Press", 
+        "precio": 10500, 
+        "portada": "./assets/threeBlindMice.jpg", 
+        "stock": 2
+    },
+    {
+        "id": 8, 
+        "isbn": 9780439023481, 
+        "titulo": "The Hunger Games",
+        "autor": "Suzanne Collins", 
+        "editorial": "Scholastic Press", 
+        "precio": 10000, 
+        "portada": "./assets/theHunger.jpg", 
+        "stock": 7
+    },
+    {
+        "id": 9, 
+        "isbn": 9781476727653, 
+        "titulo": "Doctor Sleep",
+        "autor": "Stephen King", 
+        "editorial": "Scribner", 
+        "precio": 14500, 
+        "portada": "./assets/doctorSleep.jpg", 
+        "stock": 6
     }
 ]

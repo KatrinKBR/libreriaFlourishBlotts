@@ -214,3 +214,7 @@
         width: 50%
     }
 }
+
+.p-left {
+    padding-left: 7rem !important;
+}
