@@ -15,7 +15,7 @@ const initLibrosDisponibles = async () =>{
 
 // Funcion que devuelve la estructura del DOM para libros disponibles
 const domLibrosDisponibles = (libro) => {
-    let seccionLibros = $(`<div class="col-lg-3 my-4">
+    let seccionLibros = $(`<div class="col-lg-3 my-4 mx-auto text-center">
                                     <img src="${libro.portada}">
                                     <span class="d-block fs-5 fw-bold my-2">${libro.titulo}</span>
                                     <span class="d-block">${libro.autor}</span>
