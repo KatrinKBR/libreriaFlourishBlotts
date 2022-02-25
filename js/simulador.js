@@ -1,53 +1,23 @@
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 let stockURL = "stock.json"
-let librosDisponibles =  []
+let librosDisponibles = []
 
 //Funcion que simula una llamada con fetch para obtener los datos desde un .json 
 const obtenerStock = async () => {
     const response = await fetch(stockURL)
-                            .then(res => res.json())
+        .then(res => res.json())
     return response
 }
 // Funcion que inicializa los libros disponibles en base a la respuesta a la llamada
-const initLibrosDisponibles = async () =>{
+const initLibrosDisponibles = async () => {
     librosDisponibles = await obtenerStock();
-}
-
-// Funcion que devuelve la estructura del DOM para libros disponibles
-const domLibrosDisponibles = (libro) => {
-    let seccionLibros = $(`<div class="col-lg-3 my-4 mx-auto text-center">
-                                    <img src="${libro.portada}">
-                                    <span class="d-block fs-5 fw-bold my-2">${libro.titulo}</span>
-                                    <span class="d-block">${libro.autor}</span>
-                                    <span class="d-block my-2">$${libro.precio}</span>
-                                    <button id="btnAgregar${libro.id}" class="btn btn-primary" onClick="agregarLibro(this.id)">Agregar</button>
-                                </div>`)
-    return seccionLibros
-}
-
-// Funcion que devuelve la estructura del DOM para libros en carrito
-const domLibrosEnCarrito = (libro) =>{
-    let nuevoLibro = $(`<div class="row my-4" id="elementoCarrito${libro.id}">
-                                <div class="col-5 justify-content-center">
-                                    <img src="${libro.portada}" class="portadaCarrito mx-auto d-block">
-                                </div>
-                                <div class="col-5 align-self-center">
-                                    <label class="fw-bold">${libro.titulo}</label>
-                                    <label>Precio: $${libro.precio}</label>
-                                    <p id="carritoCantidad${libro.id}">Cantidad: ${libro.cantidad}</p> 
-                                </div>
-                                <div class="col-2 align-self-center">
-                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="./assets/trash.png" alt="eliminar" onClick="eliminarLibro(this.id)">
-                                </div>
-                            </div>`)
-    return nuevoLibro
 }
 
 // Funcion que muestra los libros disponibles en el DOM
 const mostrarLibrosDisponibles = () => {
     for (libro of librosDisponibles) {
         // Solo se muestran los libros con stock
-        if(libro.stock != 0) {
+        if (libro.stock != 0) {
             let seccionLibros = domLibrosDisponibles(libro)
             $('#content').append(seccionLibros)
         }
@@ -56,7 +26,7 @@ const mostrarLibrosDisponibles = () => {
 
 // Funcion que se llama al hacer click en el boton agregar
 const agregarLibro = (elemId) => {
-    let id = parseInt(elemId.replace("btnAgregar",""))
+    let id = parseInt(elemId.replace("btnAgregar", ""))
 
     // Verificamos si el libro ya esta en el carrito
     let libroExistente = carrito.find(libro => libro.id == id)
@@ -65,12 +35,12 @@ const agregarLibro = (elemId) => {
     if (libroExistente != null) {
         // Añadimos +1 la ya existente en el carrito
         libroExistente.cantidad += 1
-        
+
         // Actualizamos el DOM
         $(`#carritoCantidad${id}`).html(`<p id="carritoCantidad${id}">Cantidad: ${libroExistente.cantidad}</p>`)
         // Mostrar el toaster
         mostrarToasterCarrito(libroExistente)
-    // Si se esta agregando por primera vez
+        // Si se esta agregando por primera vez
     } else {
         // Obtenemos el libro a añadir
         let libroNuevo = librosDisponibles.find(libro => libro.id == id)
@@ -81,6 +51,7 @@ const agregarLibro = (elemId) => {
         // Se guarda en el arreglo de carrito
         carrito.push(libroNuevo)
 
+        // Se agrega al dom la info del nuevo libro
         let libroNuevoDom = domLibrosEnCarrito(libroNuevo)
         $('#contentCarrito').append(libroNuevoDom)
 
@@ -90,6 +61,9 @@ const agregarLibro = (elemId) => {
         // Ocultamos el mensaje de no hay articulos y mostramos el total
         $("#carritoVacio").hide()
         $("#totalCompraMsj").show()
+
+        // Activamos el boton pagar
+        btnPagar.disabled = false;
     }
 
     // Guarda el carrito en el localStorage
@@ -99,34 +73,31 @@ const agregarLibro = (elemId) => {
     actualizarTotalCarrito()
     // Actualiza el numero con la cantidad de libros en el carrito
     actualizarCantidadCarrito()
-
-
-
-
 }
 
 // Funcion que se llama al hacer click en el boton eliminar
 const eliminarLibro = (elemId) => {
-    let id = parseInt(elemId.replace("btnEliminar",""))
+    let id = parseInt(elemId.replace("btnEliminar", ""))
 
     // Quitamos los elementos del DOM
-   $(`#elementoCarrito${id}`).remove();
+    $(`#elementoCarrito${id}`).remove();
     // Eliminamos el elemento de carrito
     carrito = carrito.filter(libro => libro.id !== id)
-    
+
     // Vuelve a guardar el carrito en el localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito))
 
     // Si el carrito quedo vacio, mostramos el mensaje de no hay articulos
+    // y se desactiva el boton de pagar
     if (carrito.length === 0) {
         $("#carritoVacio").show()
+        btnPagar.disabled = true;
     }
 
     // Actualiza el total del carrito
     actualizarTotalCarrito()
     // Actualiza el numero con la cantidad de libros en el carrito
     actualizarCantidadCarrito()
-
 }
 
 // Funcion que se llama al hacer click en el boton de buscar libro
@@ -136,7 +107,7 @@ const buscarLibro = () => {
     const valorInput = $("#inputBuscar").val().toLowerCase()
 
     // Si esta vacio, vuelve a mostrar todos los libros
-    if(valorInput == "") {
+    if (valorInput == "") {
         mostrarLibrosDisponibles()
     } else {
         // Sino, realiza el filtro en base al titulo ingresado por el usuario
@@ -185,8 +156,8 @@ const actualizarTotalCarrito = () => {
 // Funcion que permite mantener el carrito al refrescar el sitio
 const cargarCarritoAlRefresco = () => {
     // Si el carrito no esta vacio, mostramos los elementos guardados en el storage
-    if (carrito.length != 0){
-        for(libro of carrito){
+    if (carrito.length != 0) {
+        for (libro of carrito) {
             let libroCarritoDom = domLibrosEnCarrito(libro)
             $('#contentCarrito').append(libroCarritoDom)
         }
@@ -194,14 +165,17 @@ const cargarCarritoAlRefresco = () => {
         // Se esconde el mensaje de vacio
         $("#carritoVacio").hide()
 
+        // Se activa el boton de pago
+        btnPagar.disabled = false;
+
         // Se actualiza el total y la cantidad
         actualizarTotalCarrito()
         actualizarCantidadCarrito()
     }
 }
 
-const multiplicarValores = (precio,cantidad) => {
-    return precio*cantidad
+const multiplicarValores = (precio, cantidad) => {
+    return precio * cantidad
 }
 
 const mostrarToasterCarrito = (libro) => {
@@ -211,16 +185,51 @@ const mostrarToasterCarrito = (libro) => {
     toast.show()
 }
 
+const realizarPago = () => {
+    if (carrito.length != 0)
+        location.href = 'realizarPago.html'
+}
+
+// Funcion que devuelve la estructura del DOM para libros disponibles
+const domLibrosDisponibles = (libro) => {
+    let seccionLibros = $(`<div class="col-lg-3 my-4 mx-auto text-center">
+                                    <img src="${libro.portada}">
+                                    <span class="d-block fs-5 fw-bold my-2">${libro.titulo}</span>
+                                    <span class="d-block">${libro.autor}</span>
+                                    <span class="d-block my-2">$${libro.precio}</span>
+                                    <button id="btnAgregar${libro.id}" class="btn btn-primary" onClick="agregarLibro(this.id)">Agregar</button>
+                                </div>`)
+    return seccionLibros
+}
+
+// Funcion que devuelve la estructura del DOM para libros en carrito
+const domLibrosEnCarrito = (libro) => {
+    let nuevoLibro = $(`<div class="row my-4" id="elementoCarrito${libro.id}">
+                                <div class="col-5 justify-content-center">
+                                    <img src="${libro.portada}" class="portadaCarrito mx-auto d-block">
+                                </div>
+                                <div class="col-5 align-self-center">
+                                    <label class="fw-bold">${libro.titulo}</label>
+                                    <label>Precio: $${libro.precio}</label>
+                                    <p id="carritoCantidad${libro.id}">Cantidad: ${libro.cantidad}</p> 
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <img id="btnEliminar${libro.id}" class="btnEliminar" src="./assets/trash.png" alt="eliminar" onClick="eliminarLibro(this.id)">
+                                </div>
+                            </div>`)
+    return nuevoLibro
+}
+
 // Llamadas cuando document.ready
-$(()=>{
+$(() => {
     $("#carritoVacio").show()
+
     cargarCarritoAlRefresco()
+
     $("#btnBuscar").click(() => {
         buscarLibro()
     })
 
     initLibrosDisponibles()
-    .then(mostrarLibrosDisponibles)
+        .then(mostrarLibrosDisponibles)
 })
-
-

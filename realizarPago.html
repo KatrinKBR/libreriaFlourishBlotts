@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago | Libreria Flourish&Blotts</title>
+    <link rel="icon" href="./assets/logo.png">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="
+    sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Inicio del NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="./assets/logo-menu.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ofertas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Fin del NavBar -->
+
+    <div class="container my-5">
+        <p class="fs-2 fw-bold">Finaliza tu compra</p>
+        <div class="row">
+            <div class="col-lg-5">
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label for="inputRut" class="form-label">RUT/RUN</label>
+                        <input type="text" class="form-control" id="inputRut" placeholder="Ej. 11111111-6">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputDocumento" class="form-label">Documento</label>
+                        <select id="inputDocumento" class="form-select">
+                            <option selected disabled>Selecciona</option>
+                            <option>Boleta</option>
+                            <option>Factura</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputNombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputApellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCorreo" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="inputCorreo" placeholder="Correo electrónico">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputTelefono" class="form-label">Teléfono</label>
+                        <input type="email" class="form-control" id="inputTelefono" placeholder="Ej. 911111111">
+                    </div>
+                    <div class="col-8">
+                        <label for="inputDireccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección">
+                    </div>
+                    <div class="col-4">
+                        <label for="inputDireccion" class="form-label">Número Depto/Oficina</label>
+                        <input type="text" class="form-control" id="inputDireccion" placeholder="Número">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="inputCiudad" class="form-label">Región</label>
+                        <input type="text" class="form-control" id="inputCiudad" placeholder="Región">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCiudad" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" id="inputCiudad" placeholder="Ciudad">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputComuna" class="form-label">Comuna</label>
+                        <input type="text" class="form-control" id="inputComuna" placeholder="Comuna">
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Acepto términos y condiciones
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-5 p-4 bordes">
+                <label class="fs-5 fw-bold px-4">Resumen de tu pedido</label>
+                <div class="row" id="contentResumen"></div>
+                <div class="px-4">
+                    <p id="totalCompraPedido" class="fs-4 fw-bold text-center">Total de tu compra: $<span id="totalCompra">0</span></p>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" id="btnPagar" onclick="pantallaExito()">Realizar compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inicio del Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header px-4 tituloCarrito">
+            <label class="fs-3">Tu carrito</label>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="contentCarrito">
+            </div>
+            <p id="carritoVacio">No hay artículos en tu carrito.</span></p>
+        </div>
+        <div class="offcanvas-footer">
+            <p id="totalCompraMsj" class="fw-bold py-2">Total de tu compra: $<span id="totalCompra">0</span></p>
+            <button type="button" class="btn btn-light float-end" id="btnBuscar" onclick="location.href = 'realizarPago.html'">Pagar</button>
+        </div>
+    </div>
+    <!-- Fin del Offcanvas -->
+
+    <!-- Inicio del Footer -->
+    <footer class="footer">
+        <div class="row px-lg-5">
+            <div class="col-lg-5 px-lg-5 footerElement">
+                <p class="footerTitle">Sobre nosotros</p>
+                <p>Librería Flourish&Blotts. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed leo
+                    a
+                    nibh mollis pellentesque.
+                    Curabitur malesuada velit neque, quis consequat est facilisis ac.
+                </p>
+            </div>
+            <div class="col-lg-5 px-lg-5 footerElement">
+                <p class="footerTitle">Ubicación</p>
+                <p>Av. Lorem Ipsum 123, Sit Amet, Adipiscing.</p>
+                <p>Sonsectetur Adipiscing 321, Curabitur, Mollis.</p>
+            </div>
+            <div class="col-lg-2 footerElement">
+                <p class="footerTitle">Síguenos</p>
+                <a href="#footer"><img src="./assets/twitter.png" alt="Twitter"></a>
+                <a href="#footer"><img src="./assets/facebook.png" alt="Facebook"></a>
+                <a href="#footer"><img src="./assets/instagram.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Fin del Footer -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="
+    sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="./js/simulador.js"></script>
+    <script src="./js/simuladorPedidos.js"></script>
+</body>
+
+</html>
