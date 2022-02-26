@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Inicio del NavBar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
@@ -43,8 +43,9 @@
     </nav>
     <!-- Fin del NavBar -->
 
+    <!-- Inicio del Container -->
     <div class="container my-5">
-        <p class="fs-2 fw-bold text-center my-5 py-4">¡Compra exitosa!</p>
+        <p class="fs-2 fw-bold text-center my-4">¡Compra exitosa!</p>
         <div class="row">
             <div class="col-lg-6">
                 <h5>N° de Orden <span class="fw-bold">12345678</span></h5>
@@ -83,9 +84,10 @@
             </div>
         </div>
     </div>
+    <!-- Fin del Container -->
 
     <!-- Inicio del Footer -->
-    <footer class="footer">
+    <footer class="footer mt-auto">
         <div class="row px-lg-5">
             <div class="col-lg-5 px-lg-5 footerElement">
                 <p class="footerTitle">Sobre nosotros</p>
@@ -109,11 +111,13 @@
     </footer>
     <!-- Fin del Footer -->
 
+    <!-- Inicio de Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="
     sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="./js/manejoCarrito.js"></script>
     <script src="./js/simuladorExito.js"></script>
+    <!--Fin de Scripts -->
 </body>
 </html>

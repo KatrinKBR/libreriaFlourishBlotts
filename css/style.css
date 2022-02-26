@@ -209,20 +209,18 @@
     padding-bottom: 20px
 }
 
-@media screen and (max-width: 992px) {
-    .icon-content {
-        width: 50%
-    }
-}
-
 .p-left {
     padding-left: 7rem !important;
 }
 
-.filtros {
-    padding: 1em 0
-}
-
 .list-group-item {
     font-size: .8em
+}
+
+.toast {
+    opacity: 1 !important;
+  }
+  
+#toast-container > div {
+    opacity: 1 !important; 
 }

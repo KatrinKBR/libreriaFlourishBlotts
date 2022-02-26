@@ -1,3 +1,21 @@
+/**
+ *  Script que se utiliza en pantallaExito.html
+ *  Tiene la logica de mostrar los libros que son parte del pedido y vaciar el carrito de compras.
+ */
+
+// Funcion que permite mostrar los libros que son parte del pedido
+ const mostrarPedidoExito = () => {
+    for (libro of carrito) {
+        let libroDelPedidoDom = domResumenPedidoExito(libro)
+        $('#contentExito').append(libroDelPedidoDom)
+    }
+
+    // Se vacia el carrito
+    carrito = []
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+}
+
+// Funcion que devuelve la estructura del DOM para libros del pedido
 const domResumenPedidoExito = (libro) => {
     let librosDelPedido = $(`<div class="col-3 my-3 bordes">
                                 <div class="row my-4" id="libroPedido${libro.id}">
@@ -14,13 +32,5 @@ const domResumenPedidoExito = (libro) => {
     return librosDelPedido
 }
 
-const mostrarPedidoExito = () => {
-    for (libro of carrito) {
-        let libroDelPedidoDom = domResumenPedidoExito(libro)
-        $('#contentExito').append(libroDelPedidoDom)
-    }
-    carrito = []
-    localStorage.setItem("carrito", JSON.stringify(carrito))
-}
-
+// Llamada a la funcion
 mostrarPedidoExito()

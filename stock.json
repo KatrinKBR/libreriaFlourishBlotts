@@ -17,7 +17,7 @@
         "editorial": "Aladdin", 
         "precio": 4000, 
         "portada": "./assets/theHound.jpg", 
-        "stock": 2
+        "stock": 1
     },
     {
         "id": 3, 

@@ -1,4 +1,11 @@
+/**
+ *  Script que se utiliza en todos los .html
+ *  Contiene la toda la logica necesaria para el manejo de un carrito de compras
+ */
+
+// Se inicializa el carrito con lo que este en el localStorage, o vacio si no existe todavia
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
+$("#carritoVacio").show()
 
 // Funcion que se llama al hacer click en el boton agregar
 const agregarLibro = (elemId) => {
@@ -12,17 +19,29 @@ const agregarLibro = (elemId) => {
         // Añadimos +1 la ya existente en el carrito
         libroExistente.cantidad += 1
 
+        // Si la cantidad es igual al stock, se deshabilita el boton agregar,
+        // para que el usuario no pueda comprar mas libros de los que estan en stock
+        if(libroExistente.cantidad == libroExistente.stock){
+            $(`#${elemId}`).prop("disabled", true);
+        }
+
         // Actualizamos el DOM
         $(`#carritoCantidad${id}`).html(`<p id="carritoCantidad${id}">Cantidad: ${libroExistente.cantidad}</p>`)
         // Mostrar el toaster
         mostrarToasterCarrito(libroExistente)
-        // Si se esta agregando por primera vez
+       
+    // Si se esta agregando por primera vez
     } else {
         // Obtenemos el libro a añadir
         let libroNuevo = librosDisponibles.find(libro => libro.id == id)
 
         // Le asignamos una nueva propiedad al objeto para cantidad
         libroNuevo["cantidad"] = 1
+
+        // Se verifica la cantidad contra el stock
+        if(libroNuevo.cantidad == libroNuevo.stock){
+            $(`#${elemId}`).prop("disabled", true);
+        }
 
         // Se guarda en el arreglo de carrito
         carrito.push(libroNuevo)
@@ -41,7 +60,6 @@ const agregarLibro = (elemId) => {
         // Activamos el boton pagar
         btnPagar.disabled = false;
     }
-
     // Guarda el carrito en el localStorage
     localStorage.setItem("carrito", JSON.stringify(carrito))
 
@@ -53,10 +71,15 @@ const agregarLibro = (elemId) => {
 
 // Funcion que se llama al hacer click en el boton eliminar
 const eliminarLibro = (elemId) => {
+    // Se obtiene el numero de id del libro
     let id = parseInt(elemId.replace("btnEliminar", ""))
 
     // Quitamos los elementos del DOM
     $(`#elementoCarrito${id}`).remove();
+
+    // Reactivamos el boton de agregar si estaba desactivado
+    $(`#btnAgregar${id}`).prop("disabled", false);
+
     // Eliminamos el elemento de carrito
     carrito = carrito.filter(libro => libro.id !== id)
 
@@ -116,6 +139,11 @@ const cargarCarritoAlRefresco = () => {
         for (libro of carrito) {
             let libroCarritoDom = domLibrosEnCarrito(libro)
             $('#contentCarrito').append(libroCarritoDom)
+            
+            // Desactivamos el boton de agregar si la cantidad en el carrito es igual al stock
+            if (libro.cantidad == libro.stock) {
+                $(`#btnAgregar${libro.id}`).prop('disabled', true)
+            }
         }
 
         // Se esconde el mensaje de vacio

@@ -1,3 +1,8 @@
+/**
+ *  Script que se utiliza en el index.html
+ *  Obtiene del stock.json los objetos y los deja en el arreglo global librosDisponibles
+ */
+
 let librosDisponibles = []
 
 //Funcion que simula una llamada con fetch para obtener los datos desde un .json 
