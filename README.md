@@ -1,4 +1,4 @@
-﻿# Libreria Flourish & Blotts
+﻿# Librería Flourish & Blotts
 Simulador de una librería e-commerce.
 
 ## Funcionalidades
