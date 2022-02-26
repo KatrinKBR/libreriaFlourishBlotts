@@ -4,6 +4,11 @@ $(() => {
 
     cargarCarritoAlRefresco()
 
+
+
     initLibrosDisponibles()
         .then(mostrarLibrosDisponibles)
+        .then(mostrarAutoresFiltro)
+        .then(mostrarEditorialesFiltro)
+    
 })

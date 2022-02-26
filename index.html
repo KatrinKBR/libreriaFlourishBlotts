@@ -57,11 +57,32 @@
         <p class="fs-2 fw-bold">Libros en Inglés</p>
         <div class="row">
             <div class="col-lg-2 bordes my-4">
-                <div id="autor">
-                    Autores
+                <div class="filtros">
+                    <p>Autores</p>
+                    <div class="list-group" id="listaAutores">
+                    </div>
                 </div>
-                <div id="editorial">Editorial</div>
-                <div id="editorial">Rango de precios</div>
+                <div class="filtros">
+                    <p>Editoriales</p>
+                    <div class="list-group" id="listaEditoriales">
+                    </div>
+                </div>
+                <div class="filtros">
+                    <p>Rango de precios</p>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" value="">
+                        $0 - $30.000
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" value="">
+                        $30.000 - $60.000
+                    </label>
+                    <label class="list-group-item">
+                        <input class="form-check-input me-1" type="checkbox" value="">
+                        $60.000 - más
+                    </label>
+                </div>
+                <button class="btn btn-primary" id="btnAplicarFiltros">Aplicar filtros</button>
             </div>
             <div class="col-lg-10 p-left">
                 <div class="row" id="content">

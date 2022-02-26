@@ -218,3 +218,11 @@
 .p-left {
     padding-left: 7rem !important;
 }
+
+.filtros {
+    padding: 1em 0
+}
+
+.list-group-item {
+    font-size: .8em
+}
