@@ -2,7 +2,7 @@
     {
         "id": 1, 
         "isbn": 9780439362139, 
-        "titulo": "Harry Potter and the Philosopher Stone",
+        "titulo": "Harry Potter and the Philosopher's Stone",
         "autor": "J.K. Rowling", 
         "editorial": "Scholastic", 
         "precio": 9200, 

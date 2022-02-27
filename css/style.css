@@ -1,3 +1,11 @@
+.custom-container {
+    width: 100%;
+    padding-right: 8rem;
+    padding-left: 8rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .navbar-custom {
     background-color: #F0E9D2;
 }
@@ -14,6 +22,31 @@
 .btn.btn-primary {
     background-color: #181D31 !important;
     border-color: #181D31 !important;
+}
+
+.tituloContainer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin: 2em 0;
+    position: relative;
+}
+.tituloText {
+    position: absolute;
+    padding-right: 1em;
+    background-color: #fff;
+}
+.tituloLine {
+    width: 100%;
+    height: 0;
+    border: 1px solid #181D31;
+    margin: 11px;
+    display: inline-block;
+    background-color: #181D31;
+}
+.tituloLineContainer {
+    width: 100%;
 }
 
 .offcanvas-header .btn-close{
@@ -71,23 +104,18 @@
     overflow: hidden;
 }
 .customBg{
-    background-color: #678983 !important;
+    background-color: #181D31 !important;
 }
 
-.footer {
-    background-color: #181D31;
-    color: #fff;
-    padding: 2em 1em;
-    margin-top: 5em;
+.accordion-button {
+    background-color: #181D31 !important;
+    color: #E4E4E4 !important;
 }
-.footer .footerTitle {
-    font-weight: bold;
-    font-size: 1.2em;
-    margin: .5em 0;
+.accordion-button.collapsed::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
-.footer .footerElement {
-    font-size: .8em;
-    text-align: justify;
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
 }
 
 .bordes {
@@ -108,13 +136,11 @@
     margin-bottom: 90px;
     border-radius: 10px
 }
-
 .top {
     padding-top: 40px;
     padding-left: 13% !important;
     padding-right: 13% !important
 }
-
 #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
@@ -122,7 +148,6 @@
     padding-left: 0px;
     margin-top: 30px
 }
-
 #progressbar li {
     list-style-type: none;
     font-size: 13px;
@@ -131,13 +156,11 @@
     position: relative;
     font-weight: 400
 }
-
 #progressbar .step0:before {
     font-family: FontAwesome;
     content: "\f10c";
     color: #fff
 }
-
 #progressbar li:before {
     width: 40px;
     height: 40px;
@@ -149,7 +172,6 @@
     margin: auto;
     padding: 0px
 }
-
 #progressbar li:after {
     content: '';
     width: 100%;
@@ -160,51 +182,42 @@
     top: 16px;
     z-index: -1
 }
-
 #progressbar li:last-child:after {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     position: absolute;
     left: -50%
 }
-
 #progressbar li:nth-child(2):after,
 #progressbar li:nth-child(3):after {
     left: -50%
 }
-
 #progressbar li:first-child:after {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     position: absolute;
     left: 50%
 }
-
 #progressbar li:last-child:after {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px
 }
-
 #progressbar li:first-child:after {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px
 }
-
 #progressbar li.active:before,
 #progressbar li.active:after {
     background: #181D31
 }
-
 #progressbar li.active:before {
     font-family: FontAwesome;
     content: "\f00c"
 }
-
 .icon {
     width: 40px;
     height: 40px;
 }
-
 .icon-content {
     padding-bottom: 20px
 }
@@ -223,4 +236,20 @@
   
 #toast-container > div {
     opacity: 1 !important; 
+}
+
+.footer {
+    background-color: #181D31;
+    color: #fff;
+    padding: 2em 1em;
+    margin-top: 5em;
+}
+.footer .footerTitle {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: .5em 0;
+}
+.footer .footerElement {
+    font-size: .8em;
+    text-align: justify;
 }

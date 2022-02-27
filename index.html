@@ -49,17 +49,17 @@
     <!-- Fin del NavBar -->
 
     <!-- Inicio del Container -->
-    <div class="container my-5">
-        <!-- Buscar input -->
-        <div class="d-flex my-5">
-            <input class="form-control me-2" type="search" placeholder="Buscar por título" aria-label="Search" id="inputBuscar">
-            <button class="btn btn-primary" id="btnBuscar">Buscar</button>
+    <div class="custom-container my-5">
+        <div class="tituloContainer">
+            <p class="fs-2 fw-bold tituloText">Libros en Inglés</p>
+            <div class="tituloLineContainer">
+                <div class="tituloLine"></div>
+            </div>
         </div>
-        <p class="fs-2 fw-bold">Libros en Inglés</p>
         <!-- Dos columnas: Acordion de filtros y content de libros disponibles -->
         <div class="row">
             <!-- Inicio de acordion de filtros -->
-            <div class="col-lg-2 my-4">
+            <div class="col-lg-2 my-4">   
                 <div class="accordion" id="accordionExample">
                     <!-- Inicio de filtro de autores -->
                     <div class="accordion-item">
@@ -83,7 +83,7 @@
                             Editoriales
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
                             <div class="accordion-body">
                                 <div class="list-group" id="listaEditoriales"></div>
                             </div>
@@ -97,7 +97,7 @@
                             Precio
                             </button>
                         </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                        <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
                             <div class="accordion-body">
                                 <div class="list-group" id="listaRangoPrecios">
                                     <label class="list-group-item">
@@ -127,6 +127,11 @@
 
             <!-- Inicio de content de libros disponibles -->
             <div class="col-lg-10 p-left">
+                <!-- Buscar input -->  
+                <div class="d-flex my-4">
+                    <input class="form-control me-2" type="search" placeholder="Buscar por título" aria-label="Search" id="inputBuscar">
+                    <button class="btn btn-primary" id="btnBuscar">Buscar</button>
+                </div>
                 <div class="row" id="content">
                 </div>
             </div>
