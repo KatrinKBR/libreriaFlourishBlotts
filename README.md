@@ -45,3 +45,4 @@ el flujo de la compra.
 
 Notas a considerar:
 1) Se vacía el carrito de compras al llegar a esta pantalla.
+2) No se está manejando la redirección del sitio, por lo que si se "retrocede" a la página anterior después de la pantalla éxito, no se mostrará información del pedido, debido a lo mencionado en el punto anterior.
